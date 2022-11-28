@@ -99,6 +99,6 @@
   }
 
   .input-base {
-    @apply text-white bg-transparent w-full;
+    @apply block bg-transparent w-full;
   }
 }

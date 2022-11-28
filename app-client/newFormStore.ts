@@ -12,7 +12,7 @@ const defState: INewFormStore = {
   componentData: [
     {
       id: "URWQhFTJhqVy7l-Nx7lkv",
-      type: "Single Select Radio",
+      type: "Text",
       question: "question1",
       options: [
         {
@@ -34,9 +34,5 @@ const defState: INewFormStore = {
 };
 
 export const newFormStore: NewFormStoreFn = (set: any, get: any) => ({
-  // activeComponent: 1,
-  // title: "",
-  // desc: "",
-  // componentData: [],
   ...defState,
 });

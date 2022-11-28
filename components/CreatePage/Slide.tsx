@@ -10,12 +10,15 @@ const Slide = () => {
   const { componentData, activeComponent } = useStore();
   const { question, options, type }: IFormItem = componentData[activeComponent];
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <div className="w-full max-w-md h-auto">
-        <FormComponentHOC
-          edit={true}
-          component={componentData[activeComponent]}
-        />
+    <div className="flex justify-center items-center">
+      <div className="w-full h-full max-w-6xl max-h-[600px] max-h-sm bg-white flex justify-center items-center">
+        <div className="w-full max-w-md">
+          <FormComponentHOC
+            edit={true}
+            component={componentData[activeComponent]}
+            activeComponent={activeComponent}
+          />
+        </div>
       </div>
     </div>
   );

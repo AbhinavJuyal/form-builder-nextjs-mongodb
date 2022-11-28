@@ -8,21 +8,21 @@ const Register = () => {
         <form className="flex flex-col">
           <div className="mb-6">
             <input
-              className="input input-bordered w-full my-2"
+              className="dui-input dui-input-bordered w-full my-2"
               type="text"
               placeholder="Email"
             />
             <input
-              className="input input-bordered w-full my-2"
+              className="dui-input dui-input-bordered w-full my-2"
               type="text"
               placeholder="Password"
             />
           </div>
-          <button type="submit" className="btn">
+          <button type="submit" className="dui-btn">
             Register
           </button>
         </form>
-        <div className="divider">or</div>
+        <div className="dui-divider">or</div>
         <ContinueWithGoogleBtn />
       </div>
     </div>

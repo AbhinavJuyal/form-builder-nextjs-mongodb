@@ -6,6 +6,8 @@ export const RADIO = "Single Select Radio";
 
 export const formComponentTypes = { CHECKBOX, TEXT, RADIO } as const;
 
+export const validAddOptionTypes = [CHECKBOX, RADIO];
+
 export const typeComponentMapping: Record<string, (props: any) => JSX.Element> =
   {
     [CHECKBOX]: CheckBox,
