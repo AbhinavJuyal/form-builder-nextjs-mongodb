@@ -2,7 +2,7 @@ import ContinueWithGoogleBtn from "../components/ContinueWithGoogleBtn";
 
 const Login = () => {
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="w-full h-full flex justify-center items-center text-white">
       <div className="w-full max-w-sm">
         <h1 className="text-3xl font-bold mb-2">Login</h1>
         <form className="flex flex-col">
@@ -18,7 +18,7 @@ const Login = () => {
               placeholder="Password"
             />
           </div>
-          <button type="submit" className="dui-btn">
+          <button type="submit" className="dui-btn dui-btn-primary">
             Login
           </button>
         </form>

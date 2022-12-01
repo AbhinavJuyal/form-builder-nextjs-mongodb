@@ -7,11 +7,14 @@ export interface IOption {
 
 export type OptionsType = IOption[];
 
+export type FormComponentTypes =
+  typeof formComponentTypes[keyof typeof formComponentTypes];
+
 export interface IFormItem {
   id: string;
-  type: string;
+  type: FormComponentTypes;
   question: string;
-  options: OptionsType;
+  options?: OptionsType;
 }
 
 export interface IFormComponent extends IFormItem {
@@ -23,6 +26,3 @@ export interface IFormData {
   desc: string;
   componentData: IFormItem[];
 }
-
-export type FormComponentTypes =
-  typeof formComponentTypes[keyof typeof formComponentTypes];

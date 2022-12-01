@@ -101,4 +101,8 @@
   .input-base {
     @apply block bg-transparent w-full;
   }
+
+  .dashboard-layout {
+    @apply px-4;
+  }
 }

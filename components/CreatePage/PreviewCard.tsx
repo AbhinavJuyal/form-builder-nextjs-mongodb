@@ -1,15 +1,23 @@
+import { IFormItem } from "@types";
+import useStore from "app-client/store";
+
 interface IPreviewCard {
   component: IFormItem;
+  index: number;
 }
 
-const PreviewCard = ({ component }: IPreviewCard) => {
+const PreviewCard = ({ component, index }: IPreviewCard) => {
   const { question } = component;
+  const { changeActiveIdx } = useStore();
   return (
-    <div className="">
+    <div
+      className="flex items-center cursor-pointer my-6"
+      onClick={() => changeActiveIdx(index)}
+    >
       {/* preview */}
-      <div className="w-[120px] max-w-[120px] h-20 border-2 border-base-300 rounded-lg mx-auto"></div>
+      <div className="w-10 aspect-square border-[1px] border-base-300 rounded-sm"></div>
       {/* preview question */}
-      <span className="inline-block w-full text-center text-sm font-light text-ellipsis">
+      <span className="inline-block w-full text-left text-sm font-medium text-ellipsis overflow-hidden max-w-full whitespace-nowrap mx-4">
         {question}
       </span>
     </div>

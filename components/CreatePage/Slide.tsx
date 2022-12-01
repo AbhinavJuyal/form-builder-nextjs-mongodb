@@ -7,16 +7,16 @@ const FormComponentHOC = dynamic(() => import("hoc/FormComponentHOC"), {
 });
 
 const Slide = () => {
-  const { componentData, activeComponent } = useStore();
-  const { question, options, type }: IFormItem = componentData[activeComponent];
+  const { componentData, activeIdx } = useStore();
+  const { question, options, type }: IFormItem = componentData[activeIdx];
   return (
     <div className="flex justify-center items-center">
       <div className="w-full h-full max-w-6xl max-h-[600px] max-h-sm bg-white flex justify-center items-center">
         <div className="w-full max-w-md">
           <FormComponentHOC
             edit={true}
-            component={componentData[activeComponent]}
-            activeComponent={activeComponent}
+            component={componentData[activeIdx]}
+            activeIdx={activeIdx}
           />
         </div>
       </div>

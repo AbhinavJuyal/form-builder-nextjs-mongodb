@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className="w-full h-full flex items-center">
+      <div className="w-full h-full flex items-center text-white">
         <main className="flex flex-col mx-auto">
           <div className="w-full max-w-sm text-center mb-4">
             <h1 className="text-4xl font-bold mb-4">Form Builder App</h1>
@@ -11,10 +11,10 @@ export default function Home() {
           </div>
           <div className="w-full flex">
             <div className="mx-auto">
-              <Link className="btn mx-2" href="/login">
+              <Link className="dui-btn mx-2" href="/login">
                 Login
               </Link>
-              <Link className="btn mx-2" href="/register">
+              <Link className="dui-btn mx-2" href="/register">
                 Register
               </Link>
             </div>
