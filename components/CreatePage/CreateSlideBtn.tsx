@@ -1,5 +1,6 @@
 import { FormComponentTypes } from "@types";
 import useStore from "app-client/store";
+import { nanoid } from "nanoid";
 import { Plus } from "phosphor-react";
 import { formComponentTypes } from "utils/constants";
 import { createDefFormItem } from "utils/fns";
@@ -22,13 +23,14 @@ const CreateSlideBtn = () => {
         className="dui-dropdown-content dui-menu p-2 ml-2 shadow bg-base-100 rounded-lg w-min"
       >
         {Object.values(formComponentTypes).map((type, idx) => (
-          <button
-            key={idx}
-            onClick={() => createNewSlide(type)}
-            className="text-black whitespace-nowrap text-left px-4 py-2 hover:bg-slate-200"
-          >
-            {type}
-          </button>
+          <li key={idx}>
+            <button
+              onClick={() => createNewSlide(type)}
+              className="whitespace-nowrap"
+            >
+              {type}
+            </button>
+          </li>
         ))}
       </ul>
     </div>

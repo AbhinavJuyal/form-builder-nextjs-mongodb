@@ -27,7 +27,7 @@ export const formItemTemp: IFormItem = {
   options: [],
 };
 
-export const optionTemp: IOption = {
+export const optionTemp: Omit<IOption, "id"> = {
   name: "",
-  value: "",
+  label: "",
 } as const;

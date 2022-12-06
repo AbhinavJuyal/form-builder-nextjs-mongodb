@@ -2,6 +2,7 @@ import { Slide, Settings, Preview } from "@components/CreatePage";
 import useStore from "app-client/store";
 
 const Create = () => {
+  const autosave = () => {};
   return (
     <div className="w-full h-full grid grid-cols-[250px_auto_250px]">
       <Preview />

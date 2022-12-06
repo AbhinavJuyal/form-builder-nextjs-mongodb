@@ -1,4 +1,5 @@
 import { IFormData, IFormItem } from "types";
+import { devtools } from "zustand/middleware";
 
 export interface INewFormStore extends IFormData {
   activeIdx: number;
@@ -15,26 +16,40 @@ const defState = {
   componentData: [
     {
       id: "URWQhFTJhqVy7l-Nx7lkv",
-      type: "Text",
+      type: "Single Select Radio",
       question: "question1",
       options: [
         {
+          id: "LDVRULNJfoPa_KJknxMuw",
           name: "2DtclqxdgFnaeD9OS5Rnh",
-          value: "q3",
+          label: "q3",
         },
         {
+          id: "FLPMsmsBrQLlU4ycCq59z",
           name: "2DtclqxdgFnaeD9OS5Rnh",
-          value: "q4",
+          label: "q4",
         },
         {
+          id: "M5BSikER4uOzeQIJEFLOX",
           name: "2DtclqxdgFnaeD9OS5Rnh",
-          value: "q5",
+          label: "q5",
         },
       ],
     },
   ],
   activeIdx: 0,
 };
+
+// export const logger: typeof devtools = (config) => (set, get, api) =>
+//   config(
+//     (args) => {
+//       console.log("  applying", args);
+//       set(args);
+//       console.log("  new state", get());
+//     },
+//     get,
+//     api
+//   );
 
 export const newFormStore: NewFormStoreFn = (set: any, get: any) => ({
   ...defState,
@@ -45,16 +60,6 @@ export const newFormStore: NewFormStoreFn = (set: any, get: any) => ({
     })),
   changeActiveIdx: (index: number) =>
     set((state: INewFormStore) => ({ ...state, activeIdx: index })),
-  // editFormItem: (formItem: IFormItem) =>
-  //   set((state: INewFormStore) => {
-  //     const { activeIdx } = state;
-  //     const activeFormItem = state.componentData[activeIdx];
-  //     if (formItem.id === activeFormItem.id) {
-  //       const newComponentData = [...state.componentData];
-  //       newComponentData[activeIdx] = formItem;
-  //       return { ...state, componentData: newComponentData };
-  //     }
-  //   }),
   editFormItem: (changes: (activeFormItem: IFormItem) => IFormItem) =>
     set((state: INewFormStore) => {
       const { activeIdx, componentData } = state;

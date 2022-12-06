@@ -1,8 +1,9 @@
 import { fromComponentTypes } from "../utils/constants";
 
 export interface IOption {
+  id: string;
   name: string;
-  value: string;
+  label: string;
 }
 
 export type OptionsType = IOption[];

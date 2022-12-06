@@ -1,15 +1,22 @@
 import { nanoid } from "nanoid";
-import cls from "classnames";
 import useStore from "app-client/store";
 
 import { RADIO, validAddOptionTypes } from "utils/constants";
 import { optionsTemp } from "utils/fns";
 import { IFormItem, OptionsType } from "types";
+import Option from "./Option";
 
 interface IOptionsList {
   edit: boolean;
   inputType: "checkbox" | "radio";
 }
+
+/**
+ * deletions
+ * edited + create options
+ * edited + delete option
+ *
+ */
 
 const OptionsList = ({ edit, inputType }: IOptionsList) => {
   const { componentData, activeIdx, editFormItem } = useStore();
@@ -30,7 +37,7 @@ const OptionsList = ({ edit, inputType }: IOptionsList) => {
       const newFormItem = { ...activeFormItem };
       const { options, type } = activeFormItem;
       const newOptions = [...(options as OptionsType)];
-      if (type === RADIO) newOptions.push(optionsTemp(newOptions[0].name));
+      if (type === RADIO) newOptions.push(optionsTemp(newOptions[0].name, ""));
       else newOptions.push(optionsTemp());
       newFormItem.options = newOptions;
       return newFormItem;
@@ -41,44 +48,18 @@ const OptionsList = ({ edit, inputType }: IOptionsList) => {
   return (
     <>
       {options &&
-        options.map(({ name, value }) => {
-          const inputId = nanoid();
+        options.map(({ id: inputId, name, label }) => {
           return (
-            <div
-              className="flex items-center w-full border p-2 my-2 rounded-lg"
+            <Option
               key={inputId}
-            >
-              <input
-                className={cls(
-                  "m-1",
-                  inputType === "radio" ? "dui-radio" : "dui-checkbox"
-                )}
-                type={inputType}
-                id={inputId}
-                name={name}
-              />
-              {edit ? (
-                <input
-                  className="input-base text-black text-xl"
-                  type="text"
-                  placeholder="Anything that is relevant to the question"
-                  defaultValue={value}
-                />
-              ) : (
-                <label
-                  className="input-base text-black text-xl ml-3"
-                  htmlFor={inputId}
-                >
-                  {value}
-                </label>
-              )}
-            </div>
+              {...{ inputId, inputType, name, edit, label }}
+            />
           );
         })}
       {edit && (
         <button
           type="button"
-          className="dui-btn capitalize mt-6 py-2"
+          className="dui-btn dui-btn-primary capitalize mt-6 py-2"
           onClick={addOption}
         >
           Create Option

@@ -2,6 +2,8 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 import { newFormStore, INewFormStore } from "./newFormStore";
 
+// const setMiddlewares = (f) => dev;
+
 const storeCombiner = (set: any, get: any) => ({
   ...newFormStore(set, get),
 });

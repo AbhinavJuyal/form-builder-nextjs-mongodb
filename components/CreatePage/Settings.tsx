@@ -18,8 +18,8 @@ const Settings = () => {
   const list = Object.values(formComponentTypes);
   return (
     <div className="highlight-bg px-6 py-10">
-      <h4 className="text-2xl text-white font-semibold">Settings</h4>
-      <DropDown list={list} onChange={changeType} />
+      <h4 className="text-2xl text-white font-semibold mb-4">Settings</h4>
+      <DropDown label="Type" list={list} onChange={changeType} />
     </div>
   );
 };
