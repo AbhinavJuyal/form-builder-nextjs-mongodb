@@ -5,6 +5,7 @@ import { RADIO, validAddOptionTypes } from "utils/constants";
 import { optionsTemp } from "utils/fns";
 import { IFormItem, OptionsType } from "types";
 import Option from "./Option";
+import { createSelector } from "app-client/selectors";
 
 interface IOptionsList {
   edit: boolean;
@@ -19,7 +20,10 @@ interface IOptionsList {
  */
 
 const OptionsList = ({ edit, inputType }: IOptionsList) => {
-  const { componentData, activeIdx, editFormItem } = useStore();
+  const componentData = useStore.use.componentData();
+  const activeIdx = useStore.use.activeIdx();
+  const editFormItem = useStore.use.editFormItem();
+
   const formItem: IFormItem = componentData[activeIdx];
   const { options, type: formItemType } = formItem;
 
@@ -52,6 +56,7 @@ const OptionsList = ({ edit, inputType }: IOptionsList) => {
           return (
             <Option
               key={inputId}
+              total={options.length}
               {...{ inputId, inputType, name, edit, label }}
             />
           );

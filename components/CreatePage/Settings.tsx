@@ -5,7 +5,8 @@ import { formComponentTypes } from "utils/constants";
 import { createDefFormItem } from "utils/fns";
 
 const Settings = () => {
-  const { editFormItem } = useStore();
+  const editFormItem = useStore.use.editFormItem();
+
   const changeType = (content: FormComponentTypes) => {
     const changes = (activeFormItem: IFormItem): IFormItem => {
       const { question } = activeFormItem;
@@ -15,6 +16,7 @@ const Settings = () => {
     };
     editFormItem(changes);
   };
+
   const list = Object.values(formComponentTypes);
   return (
     <div className="highlight-bg px-6 py-10">

@@ -3,16 +3,15 @@ import useStore from "app-client/store";
 
 interface IPreviewCard {
   component: IFormItem;
-  index: number;
+  changeIdx: () => void;
 }
 
-const PreviewCard = ({ component, index }: IPreviewCard) => {
+const PreviewCard = ({ component, changeIdx }: IPreviewCard) => {
   const { question } = component;
-  const { changeActiveIdx } = useStore();
   return (
     <div
       className="flex items-center cursor-pointer my-6"
-      onClick={() => changeActiveIdx(index)}
+      onClick={() => changeIdx()}
     >
       {/* preview */}
       <div className="w-10 aspect-square border-[1px] border-base-300 rounded-sm"></div>

@@ -1,3 +1,4 @@
+import { createSelectors } from "utils/fns";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 import { newFormStore, INewFormStore } from "./newFormStore";
@@ -8,10 +9,12 @@ const storeCombiner = (set: any, get: any) => ({
   ...newFormStore(set, get),
 });
 
-interface IStore extends INewFormStore {}
+export interface IStore extends INewFormStore {}
 
-const useStore = create<IStore, [["zustand/devtools", IStore]]>(
+const useStoreBase = create<IStore, [["zustand/devtools", IStore]]>(
   devtools(storeCombiner)
 );
+
+const useStore = createSelectors(useStoreBase);
 
 export default useStore;

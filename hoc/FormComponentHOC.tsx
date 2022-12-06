@@ -21,6 +21,8 @@ const FormComponentHOC = ({
     ...component,
   };
 
+  console.log(question, "question");
+
   return (
     <>
       <div className="relative flex items-center mb-6 form-hoc">
@@ -28,13 +30,15 @@ const FormComponentHOC = ({
           {activeIdx + 1}.
         </div>
         {edit ? (
-          <input
-            className="input-base text-black font-medium text-4xl"
-            type="text"
-            placeholder="Type your question here..."
-            name="question"
-            defaultValue={question}
-          />
+          <div key={question}>
+            <input
+              className="input-base text-black font-medium text-4xl input-here"
+              type="text"
+              placeholder="Type your question here..."
+              name="asdsa"
+              defaultValue={question}
+            />
+          </div>
         ) : (
           <div className="w-full text-black font-medium text-4xl">
             {question}

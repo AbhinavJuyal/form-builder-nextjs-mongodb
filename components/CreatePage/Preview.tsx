@@ -4,7 +4,9 @@ import CreateSlideBtn from "./CreateSlideBtn";
 import PreviewCard from "./PreviewCard";
 
 const Preview = () => {
-  const { componentData } = useStore();
+  const componentData = useStore.use.componentData();
+  const changeActiveIdx = useStore.use.changeActiveIdx();
+
   return (
     <div className="h-full py-10 px-6 highlight-bg text-white">
       <div className="flex items-center justify-between mb-8">
@@ -12,7 +14,11 @@ const Preview = () => {
         <CreateSlideBtn />
       </div>
       {componentData.map((component: IFormItem, index: number) => (
-        <PreviewCard key={component.id} component={component} index={index} />
+        <PreviewCard
+          key={component.id}
+          component={component}
+          changeIdx={() => changeActiveIdx(index)}
+        />
       ))}
     </div>
   );

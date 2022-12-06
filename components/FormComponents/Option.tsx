@@ -1,4 +1,5 @@
 import { IFormItem, OptionsType } from "@types";
+import { createSelector } from "app-client/selectors";
 import useStore from "app-client/store";
 import cls from "classnames";
 import { MinusCircle } from "phosphor-react";
@@ -12,10 +13,11 @@ interface IOption {
   name: string;
   edit: boolean;
   label: string;
+  total: number;
 }
 
-const Option = ({ inputId, inputType, name, edit, label }: IOption) => {
-  const { editFormItem } = useStore();
+const Option = ({ inputId, inputType, name, edit, label, total }: IOption) => {
+  const editFormItem = useStore.use.editFormItem();
 
   const onLabelTxtChange: ChangeEventHandler<HTMLInputElement> = debounce(
     (e) => {
@@ -48,7 +50,7 @@ const Option = ({ inputId, inputType, name, edit, label }: IOption) => {
   };
 
   return (
-    <div className="relative flex items-center w-full border p-2 my-2 rounded-lg">
+    <div className="group relative flex items-center w-full border p-2 my-2 rounded-lg">
       <input
         className={cls(
           "m-1",
@@ -60,11 +62,11 @@ const Option = ({ inputId, inputType, name, edit, label }: IOption) => {
         id={inputId}
         name={name}
       />
-      {edit && (
+      {edit && total !== 1 && (
         <MinusCircle
-          className="absolute right-2 text-base-100 cursor-pointer"
+          className="hidden group-hover:block absolute -right-4 text-base-100 cursor-pointer"
           onClick={() => removeOption(inputId)}
-          size={32}
+          size={28}
           weight="fill"
         />
       )}

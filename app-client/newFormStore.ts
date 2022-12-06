@@ -6,6 +6,7 @@ export interface INewFormStore extends IFormData {
   addFormItem: (newFormItem: IFormItem) => void;
   changeActiveIdx: (index: number) => void;
   editFormItem: (changes: (activeFormItem: IFormItem) => IFormItem) => void;
+  editFormTitle: (title: string) => void;
 }
 
 type NewFormStoreFn = (set: any, get: any) => INewFormStore;
@@ -68,4 +69,6 @@ export const newFormStore: NewFormStoreFn = (set: any, get: any) => ({
       newComponentData[activeIdx] = changes(activeFormItem);
       return { ...state, componentData: newComponentData };
     }),
+  editFormTitle: (title: string) =>
+    set((state: INewFormStore) => ({ ...state, title })),
 });

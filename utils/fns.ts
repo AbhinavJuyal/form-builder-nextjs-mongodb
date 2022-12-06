@@ -1,8 +1,9 @@
-import { FormComponentTypes } from "@types";
+import { FormComponentTypes, WithSelectors } from "@types";
 import { nanoid } from "nanoid";
 import { formItemTemp, optionTemp, validAddOptionTypes } from "./constants";
+import { StoreApi, UseBoundStore } from "zustand";
 
-export const debounce = <T extends Function>(cb: T, wait = 20) => {
+export const debounce = <T extends Function>(cb: T, wait = 500) => {
   let h: any = 0;
   let callable = (...args: any) => {
     clearTimeout(h);
@@ -41,3 +42,17 @@ export const createDefFormItem = (type: FormComponentTypes) => {
 };
 
 export const containsKey = (obj: any, key: string) => obj.hasOwnProperty(key);
+
+type State = object;
+
+export const createSelectors = <S extends UseBoundStore<StoreApi<State>>>(
+  _store: S
+) => {
+  let store = _store as WithSelectors<typeof _store>;
+  store.use = {};
+  for (let k of Object.keys(store.getState())) {
+    (store.use as any)[k] = () => store((s) => s[k as keyof typeof s]);
+  }
+
+  return store;
+};

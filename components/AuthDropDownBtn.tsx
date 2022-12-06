@@ -21,7 +21,7 @@ const extractData = (userData: any) => {
 const UserProfileAvatar = () => {
   const { initials } = extractData(userData);
   return (
-    <div className="flex justify-center items-center w-9 aspect-square bg-[url(https://d1llvcsapfiksz.cloudfront.net/vendors/moscilate/moscillate-granular-textures/images/granulartextures_desktop.jpg)] bg-[cover] bg-[center_center] rounded-full m-2">
+    <div className="flex justify-center items-center w-9 aspect-square text-primary-content bg-[url(https://d1llvcsapfiksz.cloudfront.net/vendors/moscilate/moscillate-granular-textures/images/granulartextures_desktop.jpg)] bg-[cover] bg-[center_center] rounded-full m-2">
       <div className="text-base">{initials}</div>
     </div>
   );
@@ -34,7 +34,7 @@ const FullUserProfileAvatar = () => {
       <div>
         <UserProfileAvatar />
       </div>
-      <div>
+      <div className="text-primary-content">
         <div className="text-base font-medium">{fullName}</div>
         <div className="text-base">{email}</div>
       </div>

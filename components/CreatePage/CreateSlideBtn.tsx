@@ -1,12 +1,11 @@
-import { FormComponentTypes } from "@types";
-import useStore from "app-client/store";
-import { nanoid } from "nanoid";
 import { Plus } from "phosphor-react";
+import useStore from "app-client/store";
 import { formComponentTypes } from "utils/constants";
 import { createDefFormItem } from "utils/fns";
+import { FormComponentTypes } from "@types";
 
 const CreateSlideBtn = () => {
-  const { addFormItem } = useStore();
+  const addFormItem = useStore.use.addFormItem();
   const createNewSlide = (type: FormComponentTypes) =>
     addFormItem(createDefFormItem(type));
   return (

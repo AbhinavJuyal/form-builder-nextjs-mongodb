@@ -2,6 +2,7 @@ import { MouseEventHandler, useEffect, useState } from "react";
 import { CaretDown } from "phosphor-react";
 import { FormComponentTypes } from "@types";
 import useStore from "app-client/store";
+import { createSelector } from "app-client/selectors";
 
 interface IDropDown {
   label: string;
@@ -10,7 +11,8 @@ interface IDropDown {
 }
 
 const DropDown = ({ label, list, onChange }: IDropDown) => {
-  const { componentData, activeIdx } = useStore();
+  const componentData = useStore.use.componentData();
+  const activeIdx = useStore.use.activeIdx();
   const { type } = componentData[activeIdx];
   const [selectedVal, setSelectedVal] = useState(type);
 
