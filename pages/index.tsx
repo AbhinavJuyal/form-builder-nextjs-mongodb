@@ -11,11 +11,11 @@ export default function Home() {
           </div>
           <div className="w-full flex">
             <div className="mx-auto">
-              <Link className="dui-btn mx-2" href="/login">
-                Login
+              <Link href="/login">
+                <span className="dui-btn dui-btn-primary mx-2">Login</span>
               </Link>
-              <Link className="dui-btn mx-2" href="/register">
-                Register
+              <Link href="/register">
+                <span className="dui-btn dui-btn-primary mx-2">Register</span>
               </Link>
             </div>
           </div>

@@ -1,4 +1,3 @@
-import React from "react";
 const userData = {
   firstName: "John",
   lastName: "Doe",
@@ -22,7 +21,7 @@ const UserProfileAvatar = () => {
   const { initials } = extractData(userData);
   return (
     <div className="flex justify-center items-center w-9 aspect-square text-primary-content bg-[url(https://d1llvcsapfiksz.cloudfront.net/vendors/moscilate/moscillate-granular-textures/images/granulartextures_desktop.jpg)] bg-[cover] bg-[center_center] rounded-full m-2">
-      <div className="text-base">{initials}</div>
+      <div className="text-base font-semibold">{initials}</div>
     </div>
   );
 };
@@ -45,7 +44,7 @@ const FullUserProfileAvatar = () => {
 const AuthDropDownBtn = () => {
   return (
     <div className="dui-dropdown dui-dropdown-bottom dui-dropdown-end bg-transparent no-animation">
-      <label tabIndex={0} className="">
+      <label tabIndex={0} className="cursor-pointer">
         <UserProfileAvatar />
       </label>
       <ul

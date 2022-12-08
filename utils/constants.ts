@@ -13,6 +13,8 @@ export const formComponentTypes: Record<string, string> = {
 
 export const validAddOptionTypes = [CHECKBOX, RADIO];
 
+export const validMultiplesTypes = [CHECKBOX];
+
 export const typeComponentMapping: Record<string, (props: any) => JSX.Element> =
   {
     [CHECKBOX]: CheckBox,

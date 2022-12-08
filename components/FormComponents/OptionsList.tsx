@@ -1,23 +1,15 @@
-import { nanoid } from "nanoid";
+import Option from "./Option";
 import useStore from "app-client/store";
 
 import { RADIO, validAddOptionTypes } from "utils/constants";
-import { optionsTemp } from "utils/fns";
-import { IFormItem, OptionsType } from "types";
-import Option from "./Option";
-import { createSelector } from "app-client/selectors";
+import { optionTempFn } from "utils/fns";
+
+import { IFormItem, IOption, OptionsType } from "types";
 
 interface IOptionsList {
   edit: boolean;
   inputType: "checkbox" | "radio";
 }
-
-/**
- * deletions
- * edited + create options
- * edited + delete option
- *
- */
 
 const OptionsList = ({ edit, inputType }: IOptionsList) => {
   const componentData = useStore.use.componentData();
@@ -41,8 +33,9 @@ const OptionsList = ({ edit, inputType }: IOptionsList) => {
       const newFormItem = { ...activeFormItem };
       const { options, type } = activeFormItem;
       const newOptions = [...(options as OptionsType)];
-      if (type === RADIO) newOptions.push(optionsTemp(newOptions[0].name, ""));
-      else newOptions.push(optionsTemp());
+      if (type === RADIO)
+        newOptions.push(optionTempFn(newOptions[0].name, "", true) as IOption);
+      else newOptions.push(optionTempFn("", "", true) as IOption);
       newFormItem.options = newOptions;
       return newFormItem;
     };
@@ -57,7 +50,7 @@ const OptionsList = ({ edit, inputType }: IOptionsList) => {
             <Option
               key={inputId}
               total={options.length}
-              {...{ inputId, inputType, name, edit, label }}
+              {...{ optionId: inputId, inputType, name, edit, label }}
             />
           );
         })}

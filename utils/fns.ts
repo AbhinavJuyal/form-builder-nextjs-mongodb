@@ -1,58 +1,93 @@
-import { FormComponentTypes, WithSelectors } from "@types";
+import {
+  FormComponentTypes,
+  IFormItem,
+  IOption,
+  ISubmitFormItem,
+} from "@types";
 import { nanoid } from "nanoid";
-import { formItemTemp, optionTemp, validAddOptionTypes } from "./constants";
-import { StoreApi, UseBoundStore } from "zustand";
+import { CHECKBOX, RADIO, TEXT, validMultiplesTypes } from "utils/constants";
+import { formItemTemp, validAddOptionTypes } from "./constants";
+
+interface IDebounceRT {
+  (...args: any): void;
+  cancel?: () => void;
+}
 
 export const debounce = <T extends Function>(cb: T, wait = 500) => {
   let h: any = 0;
-  let callable = (...args: any) => {
+
+  let callable: IDebounceRT = (...args: any) => {
     clearTimeout(h);
     h = setTimeout(() => cb(...args), wait);
   };
+
+  const cancel = () => clearTimeout(h);
+
+  callable.cancel = cancel;
+
   return <T>(<any>callable);
 };
 
-// export const promisify =
-//   <T extends Function>(cb: T, wait = 20) =>
-//   (...args: any) => {
-//     return new Promise((resolve, reject) => {
-//       setTimeout(())
-//       cb(...args, (err: any, data: any) => {
-//         if (err) reject(err);
-//         resolve(data);
-//       });
-//     });
-//   };
+export const optionTempFn = (
+  name: string = "",
+  label: string = "",
+  create: boolean = false
+): IOption | Omit<IOption, "id"> => {
+  const returnObj = {
+    label: label || "",
+    name: name || nanoid(),
+  };
+  return create ? { id: nanoid(), ...returnObj } : returnObj;
+};
 
-export const optionsTemp = (name: string = "", label: string = "") => ({
-  id: nanoid(),
-  label: label || "",
-  name: name || nanoid(),
-  ...optionsTemp,
-});
+export const hasOptionKey = (type: string) =>
+  validAddOptionTypes.includes(type);
+
+export const hasMultipleAnswers = (type: string) =>
+  validMultiplesTypes.includes(type);
 
 export const createDefFormItem = (type: FormComponentTypes) => {
   const newFormItem = { ...formItemTemp };
   newFormItem.id = nanoid();
   newFormItem.type = type;
   const ifOption = validAddOptionTypes.includes(type);
-  newFormItem.options = ifOption ? [optionsTemp("", "")] : [];
+  newFormItem.options = ifOption ? [<IOption>optionTempFn("", "", true)] : [];
   if (!ifOption) delete newFormItem["options"];
   return newFormItem;
 };
 
 export const containsKey = (obj: any, key: string) => obj.hasOwnProperty(key);
 
-type State = object;
+export const parseFormData = (componentData: IFormItem[]): ISubmitFormItem[] =>
+  componentData.map(({ id: itemId, question, type, options }) => ({
+    itemId,
+    type,
+    question,
+    value: hasOptionKey(type) && options && hasMultipleAnswers(type) ? [] : "",
+  }));
 
-export const createSelectors = <S extends UseBoundStore<StoreApi<State>>>(
-  _store: S
-) => {
-  let store = _store as WithSelectors<typeof _store>;
-  store.use = {};
-  for (let k of Object.keys(store.getState())) {
-    (store.use as any)[k] = () => store((s) => s[k as keyof typeof s]);
+export const changeFormState = (
+  prev: ISubmitFormItem[],
+  e: EventTarget & HTMLFormElement,
+  activeIdx: number
+): ISubmitFormItem[] => {
+  const { value } = e;
+  const { type } = prev[activeIdx];
+  const temp = [...prev];
+
+  if (type === CHECKBOX) {
+    const { checked } = e;
+    const prevVal = [...prev[activeIdx].value];
+    const newVal = checked
+      ? [...prevVal, value]
+      : [...prevVal.filter((val) => val !== value)];
+    temp[activeIdx].value = newVal;
   }
-
-  return store;
+  if (type === RADIO) {
+    temp[activeIdx].value = value;
+  }
+  if (type === TEXT) {
+    temp[activeIdx].value = value;
+  }
+  return temp;
 };

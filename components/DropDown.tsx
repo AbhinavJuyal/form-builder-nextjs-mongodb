@@ -2,7 +2,6 @@ import { MouseEventHandler, useEffect, useState } from "react";
 import { CaretDown } from "phosphor-react";
 import { FormComponentTypes } from "@types";
 import useStore from "app-client/store";
-import { createSelector } from "app-client/selectors";
 
 interface IDropDown {
   label: string;

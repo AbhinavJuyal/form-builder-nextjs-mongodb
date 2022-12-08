@@ -31,3 +31,10 @@ export interface IFormData {
   desc: string;
   componentData: IFormItem[];
 }
+
+export interface ISubmitFormItem {
+  itemId: string;
+  type: string;
+  question: string;
+  value: string | string[];
+}

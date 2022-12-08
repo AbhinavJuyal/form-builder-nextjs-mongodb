@@ -2,6 +2,7 @@ import { ChangeEventHandler } from "react";
 import AuthDropDownBtn from "@components/AuthDropDownBtn";
 import useStore from "app-client/store";
 import { debounce } from "utils/fns";
+import { Eye } from "phosphor-react";
 
 const NavBar = () => {
   const title = useStore.use.title();
@@ -12,14 +13,24 @@ const NavBar = () => {
   );
 
   return (
-    <div className="w-full h-auto flex justify-between bg-neutral-focus pl-4 py-4">
+    <div className="w-full h-auto flex justify-between bg-neutral-focus px-4 py-4">
       <input
         type="text"
         className="input-base max-w-xs text-primary-content font-semibold text-3xl text-ellipsis"
-        defaultValue={title}
+        value={title}
         onChange={titleChange}
       />
-      <AuthDropDownBtn />
+      <div className="flex items-center">
+        <Eye
+          size={32}
+          weight="fill"
+          className="hover:text-primary-content mx-2 cursor-pointer"
+        />
+        <button type="button" className="dui-btn dui-btn-primary mx-4">
+          Save
+        </button>
+        <AuthDropDownBtn />
+      </div>
     </div>
   );
 };

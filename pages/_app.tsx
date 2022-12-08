@@ -8,10 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Form Builder</title>
       </Head>
-      <div
-        className="w-full h-screen bg-base-200
-      "
-      >
+      <div className="w-full h-screen">
         <Component {...pageProps} />
       </div>
     </>

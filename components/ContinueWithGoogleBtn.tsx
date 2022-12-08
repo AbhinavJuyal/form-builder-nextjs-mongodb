@@ -5,7 +5,7 @@ const ContinueWithGoogleBtn = () => {
   return (
     <button
       type="button"
-      className="dui-btn dui-btn-primary w-full rounded-full"
+      className="dui-btn dui-btn-outline dui-btn-primary w-full rounded-full"
     >
       <div className="flex items-center">
         <GoogleLogo size={32} className="mr-4" weight="bold" />
