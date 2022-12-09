@@ -1,8 +1,8 @@
 import { IFormComponent } from "types";
 import OptionsList from "./OptionsList";
 
-const CheckBox = ({ edit, options }: IFormComponent) => {
-  return <OptionsList edit={edit} inputType="checkbox" />;
+const CheckBox = ({ edit, formItem }: IFormComponent) => {
+  return <OptionsList edit={edit} formItem={formItem} inputType="checkbox" />;
 };
 
 export default CheckBox;

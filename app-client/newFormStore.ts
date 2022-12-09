@@ -23,17 +23,17 @@ type NewFormStoreFn = (set: any, get: any) => INewFormStore;
 //         {
 //           id: "LDVRULNJfoPa_KJknxMuw",
 //           name: "2DtclqxdgFnaeD9OS5Rnh",
-//           label: "q3",
+//           value: "q3",
 //         },
 //         {
 //           id: "FLPMsmsBrQLlU4ycCq59z",
 //           name: "2DtclqxdgFnaeD9OS5Rnh",
-//           label: "q4",
+//           value: "q4",
 //         },
 //         {
 //           id: "M5BSikER4uOzeQIJEFLOX",
 //           name: "2DtclqxdgFnaeD9OS5Rnh",
-//           label: "q5",
+//           value: "q5",
 //         },
 //       ],
 //     },
@@ -64,18 +64,21 @@ const defState = {
       options: [
         {
           id: "RfUDU6tP8INHldtplB4FZ",
-          label: "op1",
+          value: "op1",
           name: "E20yWbqxaeOLF5de1yPRB",
+          checked: false,
         },
         {
           id: "DFyO9sp-24tfRjUNsMKMo",
-          label: "op2",
+          value: "op2",
           name: "E20yWbqxaeOLF5de1yPRB",
+          checked: false,
         },
         {
           id: "CK2tIFpoaf9W5HudANtB8",
-          label: "op3",
+          value: "op3",
           name: "E20yWbqxaeOLF5de1yPRB",
+          checked: false,
         },
       ],
     },
@@ -86,18 +89,21 @@ const defState = {
       options: [
         {
           id: "Kqe86HS8DLqd3m2pi2LQO",
-          label: "op1",
+          value: "op1",
           name: "5c2Er97XuzTjlpfSazR46",
+          checked: false,
         },
         {
           id: "LQkEpYF_qwoKm1h6m3MEE",
-          label: "op2`",
+          value: "op2`",
           name: "zFJ-0m6vVFdY4zILLIRPj",
+          checked: false,
         },
         {
           id: "w7iB0_guI3X7Jyn22ar0l",
-          label: "op3",
+          value: "op3",
           name: "MugZRBnxKNtw2I7oLuIgO",
+          checked: false,
         },
       ],
     },
@@ -105,6 +111,7 @@ const defState = {
       id: "4WJMNNymCG-7GJXjWg5Jb",
       type: "Text",
       question: "question3",
+      value: "",
     },
   ],
   activeIdx: 0,

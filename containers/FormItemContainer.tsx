@@ -4,24 +4,18 @@ import { ChangeEvent, ChangeEventHandler } from "react";
 import { debounce } from "utils/fns";
 import useStore from "app-client/store";
 
-// interface IFormComponentHOC {
-//   component: IFormItem;
-//   edit: boolean;
-//   activeIdx: number;
-// }
-
 const FormItemContainer = () => {
   const editFormItem = useStore.use.editFormItem();
   const activeIdx = useStore.use.activeIdx();
   const edit = useStore.use.edit();
   const componentData = useStore.use.componentData();
-  const component = componentData[activeIdx];
-  const { question, type }: IFormItem = component;
+  const formItem = componentData[activeIdx];
+  const { question, type }: IFormItem = formItem;
   const FormComponent = typeComponentMapping[type];
 
   const baseProps = {
     edit,
-    ...component,
+    formItem,
   };
 
   const changeQuestion: ChangeEventHandler<HTMLInputElement> = (e) => {

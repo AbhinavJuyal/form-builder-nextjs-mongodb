@@ -5,23 +5,22 @@ import { MinusCircle } from "phosphor-react";
 import useStore from "app-client/store";
 import { debounce, optionTempFn } from "utils/fns";
 
-import { IFormItem, OptionsType } from "@types";
+import { IFormItem, IOption, OptionsType } from "@types";
 
 /**
  * inputId is only required when edit is false.
  * if the only one option left in the options array
  * then deletion should not be available (total === 1)
  */
-interface IOption {
-  optionId: string;
+interface IOptionComp {
   inputType: "checkbox" | "radio";
-  name: string;
   edit: boolean;
-  label: string;
   total: number;
+  optionAttr: IOption;
 }
 
-const Option = ({ optionId, inputType, name, edit, label, total }: IOption) => {
+const Option = ({ inputType, edit, total, optionAttr }: IOptionComp) => {
+  const { id: optionId, name, value, checked } = optionAttr;
   const editFormItem = useStore.use.editFormItem();
 
   const onLabelTxtChange: ChangeEventHandler<HTMLInputElement> = debounce(
@@ -69,7 +68,8 @@ const Option = ({ optionId, inputType, name, edit, label, total }: IOption) => {
         type={inputType}
         id={optionId}
         name={name}
-        value={label}
+        value={value}
+        defaultChecked={checked}
       />
       {edit && total !== 1 && (
         <MinusCircle
@@ -85,14 +85,14 @@ const Option = ({ optionId, inputType, name, edit, label, total }: IOption) => {
           type="text"
           placeholder="Anything that is relevant to the question"
           onChange={onLabelTxtChange}
-          defaultValue={label}
+          defaultValue={value}
         />
       ) : (
         <label
           className="input-base text-black text-xl ml-3 py-2"
           htmlFor={optionId}
         >
-          {label}
+          {value}
         </label>
       )}
     </div>

@@ -31,5 +31,5 @@ export const formItemTemp: IFormItem = {
 
 export const optionTemp: Omit<IOption, "id"> = {
   name: "",
-  label: "",
+  value: "",
 } as const;

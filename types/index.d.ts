@@ -7,7 +7,8 @@ export type WithSelectors<S> = S extends { getState: () => infer T }
 export interface IOption {
   id: string;
   name: string;
-  label: string;
+  value: string;
+  checked?: boolean;
 }
 
 export type OptionsType = IOption[];
@@ -20,9 +21,11 @@ export interface IFormItem {
   type: FormComponentTypes;
   question: string;
   options?: OptionsType;
+  value?: string;
 }
 
-export interface IFormComponent extends IFormItem {
+export interface IFormComponent {
+  formItem: IFormItem;
   edit: boolean;
 }
 

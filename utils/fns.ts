@@ -5,7 +5,7 @@ import {
   ISubmitFormItem,
 } from "@types";
 import { nanoid } from "nanoid";
-import { CHECKBOX, RADIO, TEXT, validMultiplesTypes } from "utils/constants";
+import { validMultiplesTypes } from "utils/constants";
 import { formItemTemp, validAddOptionTypes } from "./constants";
 
 interface IDebounceRT {
@@ -30,11 +30,11 @@ export const debounce = <T extends Function>(cb: T, wait = 500) => {
 
 export const optionTempFn = (
   name: string = "",
-  label: string = "",
+  value: string = "",
   create: boolean = false
 ): IOption | Omit<IOption, "id"> => {
   const returnObj = {
-    label: label || "",
+    value: value || "",
     name: name || nanoid(),
   };
   return create ? { id: nanoid(), ...returnObj } : returnObj;
@@ -65,29 +65,3 @@ export const parseFormData = (componentData: IFormItem[]): ISubmitFormItem[] =>
     question,
     value: hasOptionKey(type) && options && hasMultipleAnswers(type) ? [] : "",
   }));
-
-export const changeFormState = (
-  prev: ISubmitFormItem[],
-  e: EventTarget & HTMLFormElement,
-  activeIdx: number
-): ISubmitFormItem[] => {
-  const { value } = e;
-  const { type } = prev[activeIdx];
-  const temp = [...prev];
-
-  if (type === CHECKBOX) {
-    const { checked } = e;
-    const prevVal = [...prev[activeIdx].value];
-    const newVal = checked
-      ? [...prevVal, value]
-      : [...prevVal.filter((val) => val !== value)];
-    temp[activeIdx].value = newVal;
-  }
-  if (type === RADIO) {
-    temp[activeIdx].value = value;
-  }
-  if (type === TEXT) {
-    temp[activeIdx].value = value;
-  }
-  return temp;
-};

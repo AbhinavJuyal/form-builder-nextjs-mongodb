@@ -9,14 +9,11 @@ import { IFormItem, IOption, OptionsType } from "types";
 interface IOptionsList {
   edit: boolean;
   inputType: "checkbox" | "radio";
+  formItem: IFormItem;
 }
 
-const OptionsList = ({ edit, inputType }: IOptionsList) => {
-  const componentData = useStore.use.componentData();
-  const activeIdx = useStore.use.activeIdx();
+const OptionsList = ({ edit, inputType, formItem }: IOptionsList) => {
   const editFormItem = useStore.use.editFormItem();
-
-  const formItem: IFormItem = componentData[activeIdx];
   const { options, type: formItemType } = formItem;
 
   const addOption = () => {
@@ -45,12 +42,14 @@ const OptionsList = ({ edit, inputType }: IOptionsList) => {
   return (
     <>
       {options &&
-        options.map(({ id: inputId, name, label }) => {
+        options.map((option) => {
           return (
             <Option
-              key={inputId}
+              key={option.id}
               total={options.length}
-              {...{ optionId: inputId, inputType, name, edit, label }}
+              optionAttr={option}
+              inputType={inputType}
+              edit={edit}
             />
           );
         })}
@@ -60,7 +59,7 @@ const OptionsList = ({ edit, inputType }: IOptionsList) => {
           className="dui-btn dui-btn-primary capitalize mt-6 py-2"
           onClick={addOption}
         >
-          Create Option
+          s Create Option
         </button>
       )}
     </>
