@@ -30,6 +30,14 @@
       ],
       "@types": [
         "./types"
+      ],
+      "@api-lib/*": [
+        "./api-lib",
+        "./api-lib/*"
+      ],
+      "@models/*": [
+        "./api-lib/models",
+        "./api-lib/models/*",
       ]
     }
   },

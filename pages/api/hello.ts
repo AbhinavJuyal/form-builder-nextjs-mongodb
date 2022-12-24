@@ -1,13 +1,16 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
+import connectDB from "@api-lib/connectDB";
+import User from "@models/user";
+import nc from "next-connect";
+import { ncOpts } from "@api-lib/nc";
 
-type Data = {
-  name: string
-}
+const handler = nc<NextApiRequest, NextApiResponse>(ncOpts);
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  res.status(200).json({ name: 'John Doe' })
-}
+export default handler.get(async (req, res) => {
+  const { method } = req;
+  console.log("server side", method);
+  await connectDB();
+  const users = await User.find();
+  if (!users) throw new Error("No users found");
+  res.status(200).json(users);
+});
