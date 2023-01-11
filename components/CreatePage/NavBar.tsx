@@ -1,8 +1,8 @@
 import { ChangeEventHandler } from "react";
 import AuthDropDownBtn from "@components/AuthDropDownBtn";
 import useStore from "app-client/store";
-import { debounce } from "utils/fns";
 import { Eye } from "phosphor-react";
+import { debounce } from "utils/debounce";
 
 const NavBar = () => {
   const title = useStore.use.title();

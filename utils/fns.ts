@@ -8,25 +8,10 @@ import { nanoid } from "nanoid";
 import { validMultiplesTypes } from "utils/constants";
 import { formItemTemp, validAddOptionTypes } from "./constants";
 
-interface IDebounceRT {
-  (...args: any): void;
-  cancel?: () => void;
-}
-
-export const debounce = <T extends Function>(cb: T, wait = 500) => {
-  let h: any = 0;
-
-  let callable: IDebounceRT = (...args: any) => {
-    clearTimeout(h);
-    h = setTimeout(() => cb(...args), wait);
-  };
-
-  const cancel = () => clearTimeout(h);
-
-  callable.cancel = cancel;
-
-  return <T>(<any>callable);
-};
+// interface IDebounceRT {
+//   (...args: any): void;
+//   cancel?: () => void;
+// }
 
 export const optionTempFn = (
   name: string = "",

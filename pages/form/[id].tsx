@@ -3,7 +3,7 @@ import { CaretDown, CaretUp } from "phosphor-react";
 import { Slide } from "@components/CreatePage";
 
 import useStore from "app-client/store";
-import { debounce } from "utils/fns";
+import { debounce } from "utils/debounce";
 import { CHECKBOX, RADIO, TEXT } from "utils/constants";
 
 import { IFormItem } from "@types";

@@ -3,7 +3,8 @@ import cls from "classnames";
 import { MinusCircle } from "phosphor-react";
 
 import useStore from "app-client/store";
-import { debounce, optionTempFn } from "utils/fns";
+import { optionTempFn } from "utils/fns";
+import { debounce } from "utils/debounce";
 
 import { IFormItem, IOption, OptionsType } from "@types";
 
@@ -40,8 +41,7 @@ const Option = ({ inputType, edit, total, optionAttr }: IOptionComp) => {
         return newFormItem;
       };
       editFormItem(change);
-    },
-    500
+    }
   );
 
   const removeOption = (inputId: string) => {

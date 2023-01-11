@@ -1,7 +1,7 @@
 import { typeComponentMapping } from "../utils/constants";
 import { IFormItem } from "types";
 import { ChangeEvent, ChangeEventHandler } from "react";
-import { debounce } from "utils/fns";
+import { debounce } from "utils/debounce";
 import useStore from "app-client/store";
 
 const FormItemContainer = () => {
